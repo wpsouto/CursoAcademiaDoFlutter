@@ -14,16 +14,17 @@ void main(List<String> args) {
   // Apresente a quantidade de pacientes com mais de 20 anos
   // Agrupar os pacientes por familia(considerar o sobrenome) apresentar por familia.
 
-  var quantMaiorQue20 = pacientes
-      .map((e) => e.split('|'))
-      .where((element) => int.parse(element[1]) > 20)
-      .length;
+  var pacientesList = pacientes.map((e) => e.split('|'));
+
+  var quantMaiorQue20 =
+      pacientesList.where((element) => int.parse(element[1]) > 20).length;
   print('Quantidade de pacientes com mais de 20 anos : ${quantMaiorQue20}');
 
-  var pacientesPorSobrenome =
-      pacientes.map((e) => e.split('|')).map((e) => e[0].split(' ')).toList();
+  var sobreNomes =
+      pacientesList.map((e) => e[0].split(' ')).map((e) => e[1]).toSet();
 
-  pacientesPorSobrenome.sort((a, b) => a[1].compareTo(b[1]));
-  print('Pacientes por familia :');
-  pacientesPorSobrenome.forEach((element) {print(element);});
+  sobreNomes.forEach((element) {
+    print('Familia : ${element}');
+    print(pacientesList.map((e) => e[0]).where((e) => e.contains(element)));
+  });
 }
