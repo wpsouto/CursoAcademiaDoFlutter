@@ -16,14 +16,17 @@ void main(List<String> args) {
 
   var pacientesList = pacientes.map((e) => e.split('|'));
 
-  var quantMaiorQue20 =
-      pacientesList.where((element) => int.parse(element[1]) > 20).length;
-  print('Quantidade de pacientes com mais de 20 anos : ${quantMaiorQue20}');
+  print('Quantidade de pacientes com mais de 20 anos : ' +
+      pacientesList
+          .where((element) => int.parse(element[1]) > 20)
+          .length
+          .toString());
 
-  var sobreNomes =
-      pacientesList.map((e) => e[0].split(' ')).map((e) => e[1]).toSet();
-
-  sobreNomes.forEach((element) {
+  pacientesList
+      .map((e) => e[0].split(' '))
+      .map((e) => e[1])
+      .toSet()
+      .forEach((element) {
     print('Familia : ${element}');
     print(pacientesList.map((e) => e[0]).where((e) => e.contains(element)));
   });
